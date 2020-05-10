@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'authors' > [
+    'authors' => [
         'base_uri' => env('AUTHORS_SERVICE_BASE_URL'),
     ],
-    'bokks' > [
+    'books' => [
         'base_uri' => env('BOOKS_SERVICE_BASE_URL'),
     ],
 ];

@@ -2,12 +2,11 @@
 
 namespace App\Services;
 
-use App\Traits\ComsumesExternalService;
+use App\Traits\ConsumesExternalService;
 
 class AuthorService
 {
-    use ComsumesExternalService;
-
+    use ConsumesExternalService;
     /**
      * The base uri to consume the authors service
      * @var string
@@ -18,5 +17,13 @@ class AuthorService
     {
         $this -> baseUri = config('services.authors.base_uri');
     }
-
+    
+     /**
+     * Obtain the full list of author from author service
+     * @var string
+     */
+    public function obtainAuthors()
+    {
+        return $this->performRequest('GET', '/authors');
+    }
 }
