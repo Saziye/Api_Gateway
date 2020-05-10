@@ -6,6 +6,7 @@ use App\User;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -43,7 +44,11 @@ class UserController extends Controller
             'password' => 'required|min:8|confirmed',
         ];
         $this->validate($request, $rules);
-        $user = User::create($request->all());
+
+        $fields = $request->all();
+        $fields['password'] = Hash::make($request->password);
+        
+        $user = User::create($fields);
         return $this->successResponse($user, Response::HTTP_CREATED);
     }
 
@@ -65,17 +70,20 @@ class UserController extends Controller
     {
         $rules = [
             'name' => 'max:255',
-            'email' => 'email|unique:user,email',
+            'email' => 'email|unique:user,email' . $user,
             'password' => 'min:8|confirmed',
         ];
         $this->validate($request, $rules);
         $user = User::findorFail($user);
         $user->fill($request->all());
+        if ($request->has('password')) {
+            $user->password = Hash::make($request->password);
+        }
         if ($user->isClean()) {
             return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $user->save();
-        return $this->successResponse($user);   
+        return $this->validResponse($user);   
     }
 
     /**
