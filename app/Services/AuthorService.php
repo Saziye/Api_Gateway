@@ -53,4 +53,13 @@ class AuthorService
     {
         return $this->performRequest('PUT', "/authors/{$author}", $data);
     }
+
+    /**
+     * Remove a single author using author service
+     * @var string
+     */
+    public function deleteAuthor($author)
+    {
+        return $this->performRequest('DELETE', "/authors/{$author}");
+    }
 }
