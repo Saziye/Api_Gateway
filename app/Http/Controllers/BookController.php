@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 
 class BookController extends Controller
 {
-    
+    use ApiResponser;
 
     /**
      * Create a new controller instance.
