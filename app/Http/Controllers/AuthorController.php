@@ -52,7 +52,7 @@ class AuthorController extends Controller
      */
     public function show($author) 
     {
-       
+        return $this->successResponse($this->authorService->obtainAuthor($author));
     }
     
     /**

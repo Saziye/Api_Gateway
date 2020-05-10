@@ -35,4 +35,14 @@ class AuthorService
     {
         return $this->performRequest('POST', '/authors', $data);
     }
+
+    /**
+     * Obtain one single author from author service
+     * @var string
+     */
+    public function obtainAuthor($author)
+    {
+        return $this->performRequest('GET', "/authors/{$author}");
+    }
+    
 }
