@@ -45,3 +45,10 @@ $router->group(['middleware' => 'client.credentails'],function() use ($router) {
 
 });
 
+/**
+* User credentials protected routes
+*/
+$router->group(['middleware' => 'auth:api'],function() use ($router) {
+    $router->get('/users/me', 'UserController@me');
+});
+

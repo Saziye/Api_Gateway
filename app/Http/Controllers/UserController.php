@@ -94,6 +94,16 @@ class UserController extends Controller
     {
         $user = User::findOrFail($user);
         $user->delete();
-        return $this->successResponse($user);
+        return $this->validResponse($user);
+    }
+
+    /**
+     * Identify existing user 
+     * @return Illuminate\Http\Response 
+     */
+    public function me(Request $request) 
+    {
+        
+        return $this->validResponse($request->user());
     }
 }
